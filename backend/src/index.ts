@@ -20,6 +20,11 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Cal.com Clone API is running' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+// THIS IS CRITICAL FOR VERCEL: Export the app
+export default app;
